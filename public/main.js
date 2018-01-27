@@ -40,6 +40,7 @@
    * @param emit: Whether or not to emit a message to the socket (to only emmit local lines)
    */
   function drawLine(x0, y0, x1, y1, color, emit){
+    console.log("Line at (" + x0 + "," + y0 + ") and (" + x1 + "," + y1 + ")");
     context.beginPath();
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
@@ -125,6 +126,7 @@
   function onDrawingEvent(data){
     var w = canvas.width;
     var h = canvas.height;
+    // console.log("Line at (" + data.x0 + "," + data.y0 + ") and (" + data.x1 + "," + data.y1 + ")");
     drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
   }
 
@@ -135,5 +137,37 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
+
+  function testSquare(){
+    var lines =  [
+      {
+          "x0": 500,
+          "y0": 500,
+          "x1": 600,
+          "y1": 500
+      },{
+          "x0": 600,
+          "y0": 500,
+          "x1": 600,
+          "y1": 600
+      },{
+          "x0": 600,
+          "y0": 600,
+          "x1": 500,
+          "y1": 600
+      },{
+          "x0": 500,
+          "y0": 600,
+          "x1": 500,
+          "y1": 500
+      }
+    ];
+
+    lines.forEach(function(line){
+      drawLine(line.x0, line.y0, line.x1, line.y1, current.color, true);
+    });
+    
+  }
+  // testSquare();
 
 })();
