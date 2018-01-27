@@ -7,15 +7,18 @@
       "name": "Kevin Bastian",
       "email": "kjb5642@rit.edu",
       "url": "kevinbastian.me"
-    },{
+    },
+    {
       "name": "Vincent Li",
       "email": "vxl1190@rit.edu",
       "url": "vincentli.me"
-    },{
+    },
+    {
       "name": "Bahdah Shin",
       "email": "bcs3409@rit.edu",
       "url": "bahdah.me"
-    },{
+    },
+    {
       "name": "Alexander Wall",
       "email": "asw8675@rit.edu"
     }
@@ -35,8 +38,8 @@
     "start": "node index"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/kevuno/RITMural.git"
+    "type": "git",
+    "url": "https://github.com/kevuno/RITMural.git"
   },
   "license": "MIT"
 }
