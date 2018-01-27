@@ -18,8 +18,7 @@ html, body {
  */
 
  #logo{
-   display: block;
-   margin: 0 auto;
+   grid-area: b;
  }
 
 .whiteboard {
@@ -35,10 +34,16 @@ html, body {
 
 .grid-container{
   display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .colors {
   padding: 5px;
+  position: relative;
+}
+
+.grid-item{
+  margin: auto;
 }
 
 .color {
@@ -46,6 +51,7 @@ html, body {
   height: 48px;
   width: 48px;
   border-radius: 25px;
+
 }
 
 .color.black { background-color: black; }
