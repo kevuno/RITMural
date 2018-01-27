@@ -31,8 +31,9 @@
     "free-speech"
   ],
   "dependencies": {
-    "express": "4.9.x",
-    "socket.io": "latest"
+    "express": "^4.9.8",
+    "mongodb": "^3.0.1",
+    "socket.io": "^2.0.4"
   },
   "scripts": {
     "start": "node index"

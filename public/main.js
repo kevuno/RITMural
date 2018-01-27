@@ -45,7 +45,7 @@
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = 2;
+    context.lineWidth = getLineWidth();
     context.stroke();
     context.closePath();
 
@@ -169,5 +169,16 @@
     
   }
   // testSquare();
+  function getLineWidth() {
+      var slider = document.getElementById("widthslider");
+      var output = document.getElementById("width-output");
+      output.innerHTML = slider.value;
+
+      slider.oninput = function () {
+          output.innerHTML = this.value;
+      }
+
+  }
+
 
 })();
