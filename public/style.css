@@ -17,6 +17,11 @@ html, body {
  * Canvas
  */
 
+ #logo{
+   display: block;
+   margin: 0 auto;
+ }
+
 .whiteboard {
   height: 100%;
   width: 100%;
@@ -25,16 +30,22 @@ html, body {
   right: 0;
   bottom: 0;
   top: 0;
+  border-style: solid;
+}
+
+.grid-container{
+  display: grid;
 }
 
 .colors {
-  position: fixed;
+  padding: 5px;
 }
 
 .color {
   display: inline-block;
   height: 48px;
   width: 48px;
+  border-radius: 25px;
 }
 
 .color.black { background-color: black; }
