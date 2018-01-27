@@ -1,0 +1,42 @@
+{
+  "name": "RIT Mural",
+  "version": "1.0.0",
+  "description": "A pro-free speech collaborative mural for RIT students",
+  "contributors": [
+    {
+      "name": "Kevin Bastian",
+      "email": "kjb5642@rit.edu",
+      "url": "kevinbastian.me"
+    },{
+      "name": "Vincent Li",
+      "email": "vxl1190@rit.edu",
+      "url": "vincentli.me"
+    },{
+      "name": "Bahdah Shin",
+      "email": "bcs3409@rit.edu",
+      "url": "bahdah.me"
+    },{
+      "name": "Alexander Wall",
+      "email": "asw8675@rit.edu"
+    }
+  ],
+  "main": "index.js",
+  "keywords": [
+    "socket.io",
+    "canvas",
+    "rit",
+    "free-speech"
+  ],
+  "dependencies": {
+    "express": "4.9.x",
+    "socket.io": "latest"
+  },
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/kevuno/RITMural.git"
+  },
+  "license": "MIT"
+}
