@@ -17,6 +17,20 @@ html, body {
  * Canvas
  */
 
+ input[type="color"] {
+	-webkit-appearance: none;
+  border: none;
+  border-radius: 5px;  
+	width: 48px;
+	height: 48px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
  #logo{
    grid-area: b;
  }
