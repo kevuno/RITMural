@@ -70,12 +70,10 @@ function loadDrawings(socket){
  */
 function saveLineToDB(data, socket){
   // Save new line to database
-
   var MongoClient = mongo.MongoClient;
 
     var url = process.env.MONGODB_URI;
     //var url = "mongodb://localhost:27017/";
-
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -88,3 +86,47 @@ function saveLineToDB(data, socket){
   });
 
 }
+
+
+let hasExploded = false;
+//clear canvas at a specified time
+function clearCanvas() {
+
+  var current = new Date();
+  var time = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+  console.log(time);
+  if (time >= "7:11:0" && time <= "7:11:10") {
+      console.log("explosion!");
+      io.emit("explosion",{});
+
+      if(!hasExploded){
+        // Delete all records from db if it has not happened
+        var MongoClient = mongo.MongoClient;
+         var url = process.env.MONGODB_URI;
+        //var url = "mongodb://localhost:27017/";
+        
+        MongoClient.connect(url, function(err, db) {
+          if (err) throw err;
+          //var dbo = db.db("mural"); // Select db
+          var dbo = db.db("heroku_9x9gsclt"); // Select db
+          dbo.collection("mural").drop(function(err, res) {
+            if (err) throw err;
+            if (res) console.log("Canvas db cleared");
+            db.close();
+          });
+        });
+      }
+      hasExploded = true;
+      return true;
+  }
+  return false;
+}
+
+// setInterval( function(){clearCanvas(hasExploded); }, );
+
+function createInterval(f,dynamicParameter,interval) {
+  setInterval(function(){
+    f(dynamicParameter);
+  }, interval);
+}
+createInterval(clearCanvas,hasExploded,1000);
