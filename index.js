@@ -20,21 +20,38 @@ function onConnection(socket){
   socket.on('drawing', (data) =>{
     // Emit to all on channel drawing, to update on new drawing
     socket.broadcast.emit('drawing', data);
-
       saveLineToDB(data, socket);
-
   });
-}
 
+  // Set up listener for loading timelapse
+  socket.on('load_timelapse', (data) => {
+      console.log("loading time lapse");
+    
+      var MongoClient = mongo.MongoClient;
+      // var url = process.env.MONGODB_URI;
+      var url = "mongodb://localhost:27017/";
+  
+      MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mural"); // Select db
+        //var dbo = db.db("heroku_9x9gsclt"); // Select db
+        dbo.collection("mural").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          socket.emit('timelapse', result);
+          // console.log(result);
+          db.close();
+        });
+    
+      });
+  });  
+
+}
 // Setting up listener connection
 io.on('connection', onConnection);
 http.listen(port, () => console.log('listening on port ' + port));
 
 // Load drawings from Database
 io.on('connect', loadDrawings);
-
-
-
 
 /**
  * Loads all entries in db to initialize the canvas with the drawings
@@ -55,13 +72,45 @@ function loadDrawings(socket){
       result.forEach(line => {
         socket.emit('drawing',line);
       });
-      console.log(result);
+      // console.log(result);
       db.close();
     });
 
   });
 
 }
+
+
+
+// Load drawings from Database
+io.on('load_timelapse', loadDrawingsTimeLapse);
+
+/**
+ * Loads all entries in db to initialize the canvas with the drawings
+ * @param socket: The socket to make calls to in the client
+ */
+function loadDrawingsTimeLapse(socket){
+  console.log("loading time lapse");
+
+  var MongoClient = mongo.MongoClient;
+  // var url = process.env.MONGODB_URI;
+  var url = "mongodb://localhost:27017/";
+
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("mural"); // Select db
+    //var dbo = db.db("heroku_9x9gsclt"); // Select db
+    dbo.collection("mural").find({}).toArray(function(err, result) {
+      if (err) throw err;
+      socket.emit('timelapse', result);
+      // console.log(result);
+      db.close();
+    });
+
+  });
+
+}
+
 
 /**
  * Saves a drawing to the database
