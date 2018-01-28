@@ -43,13 +43,13 @@ io.on('connect', loadDrawings);
 function loadDrawings(socket){
 
   var MongoClient = mongo.MongoClient;
-  // var url = process.env.MONGODB_URI;
-  var url = "mongodb://localhost:27017/";
+  var url = process.env.MONGODB_URI;
+  //var url = "mongodb://localhost:27017/";
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
-    //var dbo = db.db("heroku_9x9gsclt"); // Select db
+    //var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").find({}).toArray(function(err, result) {
       if (err) throw err;
       result.forEach(line => {
@@ -73,14 +73,14 @@ function saveLineToDB(data, socket){
 
   var MongoClient = mongo.MongoClient;
 
-    // var url = process.env.MONGODB_URI;
-    var url = "mongodb://localhost:27017/";
+    var url = process.env.MONGODB_URI;
+    //var url = "mongodb://localhost:27017/";
 
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
-    // var dbo = db.db("heroku_9x9gsclt"); // Select db
+    //var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").insertOne(data, function(err, res) {
       if (err) throw err;
       db.close();
