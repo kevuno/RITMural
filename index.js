@@ -65,7 +65,9 @@ function loadDrawings(socket){
 function saveLineToDB(data, socket){
   // Save new line to database 
   var MongoClient = mongo.MongoClient;
-  var url = "mongodb://localhost:27017/";
+  //var url = "mongodb://localhost:27017/";
+  var url = "mongodb://heroku_t15jg65r:brickhack4@ds117848.mlab.com:17848/heroku_t15jg65r";
+
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mural"); // Select db
