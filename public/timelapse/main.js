@@ -8,6 +8,7 @@
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var colors = document.getElementsByClassName('color');
   var color_picker = document.getElementById('color_picker');
+  var color_picker = document.getElementById('color_picker');
   var eraser = document.getElementById('erase');
   var context = canvas.getContext('2d');
 
@@ -95,7 +96,7 @@
   }
 
   function getLineWidth() {
-      return document.getElementById("widthslider").value;
+      return document.getElementById("widthslider").value % 15;
   }
   console.log(socket);  
   socket.emit('load_timelapse');
