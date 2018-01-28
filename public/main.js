@@ -8,6 +8,7 @@
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var colors = document.getElementsByClassName('color');
   var color_picker = document.getElementById('color_picker');
+  var eraser = document.getElementById('erase');
   var context = canvas.getContext('2d');
 
   // Default ink color
@@ -71,6 +72,9 @@
     colors[i].addEventListener('click', onColorUpdate, false);
   }
   color_picker.addEventListener('change', onColorPicked, false);
+
+  /** ==== Setting up listeners for eraser  ==== **/
+  eraser.addEventListener('click', erase ,false )
 
 
   // Socket Listener for the drawing channel
@@ -233,6 +237,12 @@
 
   slider.oninput = function () {
       output.innerHTML = this.value;
+  }
+
+  //erase function
+  function erase(){
+    current.color = 'white';
+    console.log('erase');
   }
 
 

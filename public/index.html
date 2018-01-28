@@ -15,20 +15,31 @@
   <div class="grid-container">
       <div class="grid-item">
        <div class="colors">
+         <!-- Colors-->
          <div class="color black"></div>
          <div class="color red"></div>
          <div class="color green"></div>
          <div class="color blue"></div>
          <div class="color yellow"></div>
+
+         <!-- Color Wheel-->
          <input type="color" name="color_picker" id="color_picker" value="#8B008B">
+
+         <!-- Eraser-->
+         <span id="erase">
+           <img src="erase.png" alt="erase" height="48" width="48"/>
+         </span>
+         
        </div>
      </div>
  
      <div class="grid-item">
+       <!-- Logo-->
        <img id="logo" src="logo.png" alt="logo" height="143" width="400" />
      </div>
 
      <div class="grid-item">
+       <!-- Pen Size-->
       <span class="width-slider">
         <input type="range" min="1" max="15" value="7" id="widthslider" class="slider" />
       </span>
