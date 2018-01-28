@@ -38,6 +38,7 @@ io.on('connect', loadDrawings);
  * @param socket: The socket to make calls to in the client
  */
 function loadDrawings(socket){
+  /**
   var MongoClient = mongo.MongoClient;
   var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
 
@@ -54,7 +55,8 @@ function loadDrawings(socket){
       db.close();
     });
     
-  }); 
+  });
+  **/
 }
 
 /**
@@ -64,6 +66,7 @@ function loadDrawings(socket){
  */
 function saveLineToDB(data, socket){
   // Save new line to database 
+  /**
   var MongoClient = mongo.MongoClient;
   var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
 
@@ -77,5 +80,6 @@ function saveLineToDB(data, socket){
       db.close();
     });
   });
+  **/
 }
 
