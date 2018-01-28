@@ -43,13 +43,13 @@ io.on('connect', loadDrawings);
 function loadDrawings(socket){
 
   var MongoClient = mongo.MongoClient;
-  // var url = process.env.MONGODB_URI;
-  var url = "mongodb://localhost:27017/";
+  var url = process.env.MONGODB_URI;
+  //var url = "mongodb://localhost:27017/";
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
-    //var dbo = db.db("heroku_9x9gsclt"); // Select db
+    //var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").find({}).toArray(function(err, result) {
       if (err) throw err;
       result.forEach(line => {
@@ -71,13 +71,14 @@ function loadDrawings(socket){
 function saveLineToDB(data, socket){
   // Save new line to database
   var MongoClient = mongo.MongoClient;
-  // var url = process.env.MONGODB_URI;
-  var url = "mongodb://localhost:27017/";
+
+    var url = process.env.MONGODB_URI;
+    //var url = "mongodb://localhost:27017/";
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
-    // var dbo = db.db("heroku_9x9gsclt"); // Select db
+    //var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").insertOne(data, function(err, res) {
       if (err) throw err;
       db.close();
@@ -101,13 +102,13 @@ function clearCanvas() {
       if(!hasExploded){
         // Delete all records from db if it has not happened
         var MongoClient = mongo.MongoClient;
-        // var url = process.env.MONGODB_URI;
-        var url = "mongodb://localhost:27017/";
+         var url = process.env.MONGODB_URI;
+        //var url = "mongodb://localhost:27017/";
         
         MongoClient.connect(url, function(err, db) {
           if (err) throw err;
-          var dbo = db.db("mural"); // Select db
-          // var dbo = db.db("heroku_9x9gsclt"); // Select db
+          //var dbo = db.db("mural"); // Select db
+          var dbo = db.db("heroku_9x9gsclt"); // Select db
           dbo.collection("mural").drop(function(err, res) {
             if (err) throw err;
             if (res) console.log("Canvas db cleared");
