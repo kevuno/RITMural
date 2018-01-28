@@ -7,6 +7,7 @@
   // Setting up canvas
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var colors = document.getElementsByClassName('color');
+  var color_picker = document.getElementById('color_picker');
   var context = canvas.getContext('2d');
 
   // Default ink color
@@ -69,6 +70,7 @@
   for (var i = 0; i < colors.length; i++){
     colors[i].addEventListener('click', onColorUpdate, false);
   }
+  color_picker.addEventListener('change', onColorPicked, false);
 
 
   // Socket Listener for the drawing channel
@@ -159,7 +161,10 @@
   function onColorUpdate(e){
     current.color = e.target.className.split(' ')[1];
   }
-
+  function onColorPicked(e){
+    current.color = e.target.value;
+    console.log(current.color);
+  }
   
   /**
    * Event that limit the number of events per second. Useful for onMouse move
