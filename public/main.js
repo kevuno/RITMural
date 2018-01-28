@@ -246,5 +246,20 @@
   }
 
 
+  //clear canvas at a specified time
+  function clearCanvas() {
+
+      var current = new Date();
+      var time = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+
+      if (time == "0:0:0") {
+          context.clearRect(0, 0, 1000, 1000);
+          return true;
+      }
+      return false;
+  }
+
+  setInterval(clearCanvas, 1);
+
 
 })();
