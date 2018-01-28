@@ -195,38 +195,6 @@
     canvas.height = window.innerHeight;
   }
 
-  function testSquare(){
-    var lines =  [
-      {
-          "x0": 500,
-          "y0": 500,
-          "x1": 600,
-          "y1": 500
-      },{
-          "x0": 600,
-          "y0": 500,
-          "x1": 600,
-          "y1": 600
-      },{
-          "x0": 600,
-          "y0": 600,
-          "x1": 500,
-          "y1": 600
-      },{
-          "x0": 500,
-          "y0": 600,
-          "x1": 500,
-          "y1": 500
-      }
-    ];
-
-    lines.forEach(function(line){
-      drawLine(line.x0, line.y0, line.x1, line.y1, current.color, true);
-    });
-    
-  }
-  // testSquare();
-
   function getLineWidth() {
       return document.getElementById("widthslider").value;
   }
@@ -237,22 +205,20 @@
     current.color = 'white';
     console.log('erase');
   }
+  var hasExploded = false;
+  // Socket Listener for the bomb channel
+  socket.on('explosion', onBombEvent);
 
-
-  //clear canvas at a specified time
-  function clearCanvas() {
-
-      var current = new Date();
-      var time = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
-
-      if (time == "0:0:0") {
-          context.clearRect(0, 0, 1000, 1000);
-          return true;
-      }
-      return false;
+  function onBombEvent(data){
+    if(!hasExploded){
+      console.log("explosion!");
+      alert("The canvas will be reset now!");
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    hasExploded = true;
   }
 
-  setInterval(clearCanvas, 1);
+
 
 
 })();
