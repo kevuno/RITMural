@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 /**
- * Initial server connection. This function gets executed 
+ * Initial server connection. This function gets executed
  * when the server gets activated for the first time
  * @param socket: The socket to comunicate with
  */
@@ -33,15 +33,18 @@ http.listen(port, () => console.log('listening on port ' + port));
 // Load drawings from Database
 io.on('connect', loadDrawings);
 
+
+
+
 /**
  * Loads all entries in db to initialize the canvas with the drawings
  * @param socket: The socket to make calls to in the client
  */
 function loadDrawings(socket){
-  
+
   var MongoClient = mongo.MongoClient;
-  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
-  
+  var url = process.env.MONGODB_URI;
+
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("heroku_9x9gsclt"); // Select db
@@ -53,9 +56,9 @@ function loadDrawings(socket){
       console.log(result);
       db.close();
     });
-    
+
   });
-  
+
 }
 
 /**
@@ -64,14 +67,12 @@ function loadDrawings(socket){
  * @param socket: The socket of the connection to communicate with the front end
  */
 function saveLineToDB(data, socket){
-  // Save new line to database 
-  
+  // Save new line to database
+
   var MongoClient = mongo.MongoClient;
 
-  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
+    var url = process.env.MONGODB_URI;
 
-
-  
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -81,6 +82,5 @@ function saveLineToDB(data, socket){
       db.close();
     });
   });
-  
-}
 
+}
