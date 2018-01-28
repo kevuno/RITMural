@@ -44,7 +44,6 @@
     (function loopIt(i) {
       setTimeout(function(){
           // your code handling here
-          console.log(data[i]);
           drawLine(data[i].x0 * w, data[i].y0 * h, data[i].x1 * w, data[i].y1 * h, data[i].color, data[i].width);
           if(i < data.length - 1)  loopIt(i+1)
         }, 50);
@@ -62,7 +61,7 @@
    * @param emit: Whether or not to emit a message to the socket (to only emmit local lines)
    */
   function drawLine(x0, y0, x1, y1, color, width, emit){
-    console.log("Line at (" + x0 + "," + y0 + ") and (" + x1 + "," + y1 + ")");
+    //console.log("Line at (" + x0 + "," + y0 + ") and (" + x1 + "," + y1 + ")");
     context.beginPath();
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
