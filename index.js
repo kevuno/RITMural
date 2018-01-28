@@ -35,44 +35,6 @@ io.on('connect', loadDrawings);
 
 
 
-//==============
-
-//the window reload function. you could of course do anything here
-function forceMidnightPageReload() {
-  var MongoClient = mongo.MongoClient;
-  var url = process.env.MONGODB_URI;
-
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("heroku_9x9gsclt"); // Select db
-    dbo.collection("mural").remove();
-      db.close();
-
-  });
-
-}
-
-//helper function to build up the desire time trigger
-function forceMidnightPageReloadGetTargetTime(hour,minute) {
-  var t = new Date();
-  t.setHours(hour);
-  t.setMinutes(minute);
-  t.setSeconds(0);
-  t.setMilliseconds(0);
-  return t;
-}
-
-//get your offset to wait value
-var timetarget = forceMidnightPageReloadGetTargetTime(01,45).getTime();
-var timenow =  new Date().getTime();
-var offsetmilliseconds = timetarget - timenow;
-
-//if it isn't midnight yet, set a timeout.
-if (offsetmilliseconds &gt;= 0){
-setTimeout(function(){forceMidnightPageReload();}, offsetmilliseconds);
-}
-
-//==============
 
 
 /**
