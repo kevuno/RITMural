@@ -38,14 +38,13 @@ io.on('connect', loadDrawings);
  * @param socket: The socket to make calls to in the client
  */
 function loadDrawings(socket){
+  
   var MongoClient = mongo.MongoClient;
-  var url = "mongodb://localhost:27017/";
-  //  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
-
+  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
   
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").find({}).toArray(function(err, result) {
       if (err) throw err;
       result.forEach(line => {
@@ -55,7 +54,8 @@ function loadDrawings(socket){
       db.close();
     });
     
-  }); 
+  });
+  
 }
 
 /**
@@ -65,16 +65,22 @@ function loadDrawings(socket){
  */
 function saveLineToDB(data, socket){
   // Save new line to database 
+  
   var MongoClient = mongo.MongoClient;
-  var url = "mongodb://localhost:27017/";
-  //  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
+
+  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
+
+
+  
+
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").insertOne(data, function(err, res) {
       if (err) throw err;
       db.close();
     });
   });
+  
 }
 
