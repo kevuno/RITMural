@@ -170,15 +170,19 @@
   }
   // testSquare();
   function getLineWidth() {
-      var slider = document.getElementById("widthslider");
-      var output = document.getElementById("width-output");
-      output.innerHTML = slider.value;
 
-      slider.oninput = function () {
-          output.innerHTML = this.value;
-      }
+      return document.getElementById("widthslider").value;
 
   }
+
+  var slider = document.getElementById("widthslider");
+  var output = document.getElementById("width-output");
+  output.innerHTML = slider.value;
+
+  slider.oninput = function () {
+      output.innerHTML = this.value;
+  }
+
 
 
 })();
