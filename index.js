@@ -41,8 +41,7 @@ function loadDrawings(socket){
   
   var MongoClient = mongo.MongoClient;
   var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
-
-
+  
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("heroku_9x9gsclt"); // Select db
@@ -68,10 +67,12 @@ function saveLineToDB(data, socket){
   // Save new line to database 
   
   var MongoClient = mongo.MongoClient;
+
   var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
 
 
   
+
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("heroku_9x9gsclt"); // Select db
