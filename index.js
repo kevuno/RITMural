@@ -34,7 +34,11 @@ http.listen(port, () => console.log('listening on port ' + port));
 io.on('connect', loadDrawings);
 
 
-
+var now = new Date();
+var midnight = now.getHours() + now.getMinutes() + now.getSeconds();
+if (midnight == 2) {
+     function(){alert("It's Time!")};
+}
 
 
 /**
