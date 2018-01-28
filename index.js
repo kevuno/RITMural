@@ -40,6 +40,7 @@ io.on('connect', loadDrawings);
 function loadDrawings(socket){
   var MongoClient = mongo.MongoClient;
   var url = "mongodb://localhost:27017/";
+  //var url2 = "mongodb://<heroku_t15jg65r>:<brickhack4>@ds117848.mlab.com:17848/heroku_t15jg65r";
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -47,13 +48,7 @@ function loadDrawings(socket){
     dbo.collection("mural").find({}).toArray(function(err, result) {
       if (err) throw err;
       result.forEach(line => {
-        socket.emit('drawing',{
-          x0: line.x0,
-          y0: line.y0,
-          x1: line.x1,
-          y1: line.y1,
-          color: line.color
-        })
+        socket.emit('drawing',line);
       });
       console.log(result);
       db.close();

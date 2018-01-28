@@ -17,6 +17,20 @@ html, body {
  * Canvas
  */
 
+ input[type="color"] {
+	-webkit-appearance: none;
+  border: none;
+  border-radius: 5px;  
+	width: 48px;
+	height: 48px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
  #logo{
    grid-area: b;
  }
@@ -34,7 +48,7 @@ html, body {
 
 .grid-container{
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr; /* changed from auto bc of jumping */
 }
 
 .colors {
@@ -50,7 +64,7 @@ html, body {
   display: inline-block;
   height: 48px;
   width: 48px;
-  border-radius: 25px;  
+  border-radius: 25px;    
 
 }
 
@@ -90,7 +104,7 @@ html, body {
     width: 25px;
     height: 15px;
     border-radius: 5px;
-    background: #4CAF50;
+    background: rgb(0, 0, 0);
     cursor: pointer;
 }
 
@@ -98,6 +112,6 @@ html, body {
     width: 25px;
     height: 15px;
     border-radius: 5px;
-    background: #4CAF50;
+    background: rgb(7, 255, 15);
     cursor: pointer;
 }
