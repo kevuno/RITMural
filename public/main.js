@@ -21,10 +21,8 @@
   canvas.addEventListener('mouseout', onMouseUp, false);
   canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false);
   
-  // Setting up listeners for mobile
-  // Set up touch events for mobile, etc
+  /** ==== Setting up listeners for mobile  ==== **/
   canvas.addEventListener("touchstart", function (e) {
-    // mousePos = getTouchPos(canvas, e);
     var touch = e.touches[0];
     var mouseEvent = new MouseEvent("mousedown", {
       clientX: touch.clientX,
@@ -50,16 +48,7 @@
     canvas.dispatchEvent(mouseEvent);
   }, false);
 
-  // Get the position of a touch relative to the canvas
-  function getTouchPos(canvasDom, touchEvent) {
-    var rect = canvasDom.getBoundingClientRect();
-    return {
-      x: touchEvent.touches[0].clientX - rect.left,
-      y: touchEvent.touches[0].clientY - rect.top
-    };
-  }
-
-  // Prevent scrolling when touching the canvas
+  /** ==== Prevent scrolling for mobile  ==== **/
   document.body.addEventListener("touchstart", function (e) {
     if (e.target == canvas) {
       e.preventDefault();
@@ -76,16 +65,28 @@
     }
   }, false);
 
-
-
+  /** ==== Setting up listeners for colors  ==== **/
   for (var i = 0; i < colors.length; i++){
     colors[i].addEventListener('click', onColorUpdate, false);
   }
-  // Socket Listener 
-  socket.on('drawing', onDrawingEvent);
 
+
+  // Socket Listener for the drawing channel
+  socket.on('drawing', onDrawingEvent);
   window.addEventListener('resize', onResize, false);
   onResize();
+
+
+  /**
+   * Main method called from socket listener to draw a line segment
+   * @param data: The data of the line to draw
+   */
+  function onDrawingEvent(data){
+    var w = canvas.width;
+    var h = canvas.height;
+    // console.log("Line at (" + data.x0 + "," + data.y0 + ") and (" + data.x1 + "," + data.y1 + ")");
+    drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.width);
+  }
 
   /**
    * Draws a line in the canvas
@@ -96,13 +97,13 @@
    * @param color: Color of the line to be draw
    * @param emit: Whether or not to emit a message to the socket (to only emmit local lines)
    */
-  function drawLine(x0, y0, x1, y1, color, emit){
+  function drawLine(x0, y0, x1, y1, color, width, emit){
     console.log("Line at (" + x0 + "," + y0 + ") and (" + x1 + "," + y1 + ")");
     context.beginPath();
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = getLineWidth();
+    context.lineWidth = width;
     context.stroke();
     context.closePath();
 
@@ -115,7 +116,8 @@
       y0: y0 / h,
       x1: x1 / w,
       y1: y1 / h,
-      color: color
+      color: color,
+      width: width
     });
   }
   
@@ -136,8 +138,7 @@
   function onMouseUp(e){
     if (!drawing) { return; }
     drawing = false;
-    console.log("Line at (" + current.x + "," + current.y + ") and (" + e.clientX + "," + e.clientY + ")");
-    drawLine(current.x, current.y, e.clientX, e.clientY, current.color, true);
+    drawLine(current.x, current.y, e.clientX, e.clientY, current.color, getLineWidth(), true);
   }
 
   /**
@@ -146,7 +147,7 @@
    */
   function onMouseMove(e){
     if (!drawing) { return; }
-    drawLine(current.x, current.y, e.clientX, e.clientY, current.color, true);
+    drawLine(current.x, current.y, e.clientX, e.clientY, current.color, getLineWidth(), true);
     current.x = e.clientX;
     current.y = e.clientY;
   }
@@ -175,17 +176,6 @@
         callback.apply(null, arguments);
       }
     };
-  }
-
-  /**
-   * Main method called from socket listener to draw a line segment
-   * @param data: The data of the line to draw
-   */
-  function onDrawingEvent(data){
-    var w = canvas.width;
-    var h = canvas.height;
-    // console.log("Line at (" + data.x0 + "," + data.y0 + ") and (" + data.x1 + "," + data.y1 + ")");
-    drawLine(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color);
   }
 
   /**
@@ -227,10 +217,9 @@
     
   }
   // testSquare();
+
   function getLineWidth() {
-
       return document.getElementById("widthslider").value;
-
   }
 
   var slider = document.getElementById("widthslider");
