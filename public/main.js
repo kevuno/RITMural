@@ -232,13 +232,6 @@
   }
 
   var slider = document.getElementById("widthslider");
-  var output = document.getElementById("width-output");
-  output.innerHTML = slider.value;
-
-  slider.oninput = function () {
-      output.innerHTML = this.value;
-  }
-
   //erase function
   function erase(){
     current.color = 'white';
