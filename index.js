@@ -6,7 +6,7 @@ const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
 const mongo = require('mongodb');
 
-// Use public folder for the html 
+// Use public folder for the html
 app.use(express.static(__dirname + '/public'));
 
 
@@ -20,34 +20,9 @@ function onConnection(socket){
   socket.on('drawing', (data) =>{
     // Emit to all on channel drawing, to update on new drawing
     socket.broadcast.emit('drawing', data);
-    saveLineToDB(data, socket);
 
-  });
+      saveLineToDB(data, socket);
 
-  // Redraw drawings from Database
-  socket.on('redraw', function(data){
-    console.log(socket);
-    console.log(data);
-    console.log("Redrawing stufffff");
-    var MongoClient = mongo.MongoClient;
-    var url = "mongodb://localhost:27017/";
-    //var url2 = "mongodb://heroku_t15jg65r:brickhack4@ds117848.mlab.com:17848/heroku_t15jg65r";
-  
-    MongoClient.connect(url, function(err, db) {
-      console.log("connecting");
-      if (err) throw err;
-      var dbo = db.db("mural"); // Select db
-      dbo.collection("mural").find({}).toArray(function(err, result) {
-        if (err) throw err;
-        // console.log(result);
-        result.forEach(line => {
-          console.log(line);
-          socket.broadcast.emit('drawing', line);
-        });
-        db.close();
-      });
-      
-    }); 
   });
 }
 
@@ -67,10 +42,6 @@ io.on('connect', loadDrawings);
  */
 function loadDrawings(socket){
 
-  console.log("Loading stufffff");
-
-
-
   var MongoClient = mongo.MongoClient;
   var url = process.env.MONGODB_URI;
 
@@ -80,8 +51,9 @@ function loadDrawings(socket){
     dbo.collection("mural").find({}).toArray(function(err, result) {
       if (err) throw err;
       result.forEach(line => {
-        socket.emit('drawing_initial',line);
+        socket.emit('drawing',line);
       });
+      console.log(result);
       db.close();
     });
 
