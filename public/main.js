@@ -196,7 +196,7 @@
   }
 
   function getLineWidth() {
-      return document.getElementById("widthslider").value;
+      return document.getElementById("widthslider").value % 15;
   }
 
   var slider = document.getElementById("widthslider");
