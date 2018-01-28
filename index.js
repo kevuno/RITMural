@@ -63,7 +63,7 @@ function forceMidnightPageReloadGetTargetTime(hour,minute) {
 }
 
 //get your offset to wait value
-var timetarget = forceMidnightPageReloadGetTargetTime(1,45).getTime();
+var timetarget = forceMidnightPageReloadGetTargetTime(01,45).getTime();
 var timenow =  new Date().getTime();
 var offsetmilliseconds = timetarget - timenow;
 
