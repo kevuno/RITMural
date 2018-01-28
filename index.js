@@ -40,7 +40,8 @@ io.on('connect', loadDrawings);
 function loadDrawings(socket){
   var MongoClient = mongo.MongoClient;
   //var url = "mongodb://localhost:27017/";
-  var url = "mongodb://heroku_t15jg65r:brickhack4@ds117848.mlab.com:17848/heroku_t15jg65r";
+  //var url = "mongodb://heroku_t15jg65r:brickhack4@ds117848.mlab.com:17848/heroku_t15jg65r";
+  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -66,8 +67,10 @@ function saveLineToDB(data, socket){
   // Save new line to database 
   var MongoClient = mongo.MongoClient;
   //var url = "mongodb://localhost:27017/";
-  var url = "mongodb://heroku_t15jg65r:brickhack4@ds117848.mlab.com:17848/heroku_t15jg65r";
+  //var url = "mongodb://heroku_t15jg65r:brickhack4@ds117848.mlab.com:17848/heroku_t15jg65r";
+  var url = "mongodb://ocean02:brickhack4@ds117878.mlab.com:17878/heroku_9x9gsclt"
 
+  
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mural"); // Select db
