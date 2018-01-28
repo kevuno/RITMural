@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <title>RIT Mural</title>
   <link rel="stylesheet" href="style.css">
-  
-</head>
-<body>
- 
-  
- 
 
+</head>
+
+
+<body>
   <!-- Colors and Logo-->
   <div class="grid-container">
       <div class="grid-item">
@@ -41,16 +39,21 @@
      <div class="grid-item">
        <!-- Pen Size-->
       <span class="width-slider">
+        <label for="widthslider">Pen Size</label>
         <input type="range" min="1" max="15" value="7" id="widthslider" class="slider" />
       </span>
+
+          <button class="butt" type="button" onclick="location.href='timelapse/index.html'">Timelapse</button>
      </div>
    </div> 
 
-   <canvas class="whiteboard" ></canvas>
-
-  
+  <canvas class="whiteboard" ></canvas>
+    
+   
+   
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/main.js"></script>
 </body>
+  
 </html>
