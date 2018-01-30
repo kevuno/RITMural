@@ -28,13 +28,13 @@ function onConnection(socket){
       console.log("loading time lapse");
     
       var MongoClient = mongo.MongoClient;
-      // var url = process.env.MONGODB_URI;
-      var url = "mongodb://localhost:27017/";
+      var url = process.env.MONGODB_URI;
+      //var url = "mongodb://localhost:27017/";
   
       MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mural"); // Select db
-        //var dbo = db.db("heroku_9x9gsclt"); // Select db
+        //var dbo = db.db("mural"); // Select db
+        var dbo = db.db("heroku_9x9gsclt"); // Select db
         dbo.collection("mural").find({}).toArray(function(err, result) {
           if (err) throw err;
           socket.emit('timelapse', result);
@@ -93,13 +93,13 @@ function loadDrawingsTimeLapse(socket){
   console.log("loading time lapse");
 
   var MongoClient = mongo.MongoClient;
-  // var url = process.env.MONGODB_URI;
-  var url = "mongodb://localhost:27017/";
+  var url = process.env.MONGODB_URI;
+  //var url = "mongodb://localhost:27017/";
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    var dbo = db.db("mural"); // Select db
-    //var dbo = db.db("heroku_9x9gsclt"); // Select db
+    //var dbo = db.db("mural"); // Select db
+    var dbo = db.db("heroku_9x9gsclt"); // Select db
     dbo.collection("mural").find({}).toArray(function(err, result) {
       if (err) throw err;
       socket.emit('timelapse', result);

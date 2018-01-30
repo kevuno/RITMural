@@ -47,7 +47,7 @@
           // your code handling here
           drawLine(data[i].x0 * w, data[i].y0 * h, data[i].x1 * w, data[i].y1 * h, data[i].color, data[i].width);
           if(i < data.length - 1)  loopIt(i+1)
-        }, 50);
+        }, 1);
     })(i)
     
   }
