@@ -1,3 +1,6 @@
+// add this to the VERY top of the first file loaded in your app
+var opbeat = require('opbeat').start()
+
 // Initialize all the libs
 const express = require('express');
 const app = express();
@@ -179,3 +182,6 @@ function createInterval(f,dynamicParameter,interval) {
   }, interval);
 }
 createInterval(clearCanvas,hasExploded,1000);
+
+// Add the Opbeat middleware after your regular middleware
+app.use(opbeat.middleware.express())
